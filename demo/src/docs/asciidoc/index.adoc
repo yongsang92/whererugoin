@@ -1,0 +1,96 @@
+= 서울시 우리마을가게 상권분석서비스 
+상권배후지-추정유동인구 www.whereareyougoing.com
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[Introduction]]
+== API 소개
+서울 열린데이터 광장에서 상권배후지-추정유동인구 데이터를 csv파일, API를 통해 제공하고있습니다 +
+하지만 csv파일은 너무 많은 정보로 인해 **가독성이 떨어지고**, API는 정보의 **일부**만을 제공합니다 +
+이런까닭에 whereareyougoing은 핵심정보를 추출후 가공해서 제공합니다 +
+또한 API 사용법을 익힐필요 없이 직관적인 사용법으로 API를 재구성했습니다 +
+서울시에서 제공하는 원천데이터를 원하신다면 다음 링크로 가시면 됩니다 +
+http://data.seoul.go.kr/dataList/OA-15582/S/1/datasetView.do
+
+
+== 제공 데이터 
+
+
+[[Streetlist]]
+=== 제공하는 도로명 목록
+현재 서비스에서 제공하는 도로명 리스트입니다.
+include::{snippets}/street-name-list/response-body.adoc[] 
+
+
+
+[[responseData]]
+=== 제공하는 데이터 목록
+include::{snippets}/data-info/response-fields.adoc[] 
+
+== API 사용 예제
+API 사용 예제를 다룹니다 데이터를 요청하는 방법은 총 4가지 입니다
+
+[[FindALL]]
+=== 모든 지역 유동인구 정보 검색
+제공하는 모든 도로의 유동인구 정보를 보여줍니다
+현재 2020년 기준으로 제공하는 총 도로명의 개수는 1010개 입니다. 모든 정보를 가져오면 가독성이 떨어지기 때문에 페이징을 했습니다
+
+NOTE: wwww.whereareyougoing/district 를 인터넷 주소창에 입력하시면 됩니다
+
+include::{snippets}/paging/links.adoc[] 
+* 하이퍼링크 설명
+
+include::{snippets}/paging/response-body-beneath-_embedded.districtList.adoc[] 
+include::{snippets}/paging/response-body-beneath-_links.adoc[] 
+* 요청 결과
+ 
+
+
+[[FindWithStreetName]]
+=== 도로명으로 유동인구 검색하기
+도로명으로 유동인구 정보를 검색합니다
+
+NOTE: wwww.whereareyougoin/district/"원하는도로명" 를 인터넷 주소창에 입력하시면 됩니다 
+include::{snippets}/findByname-method's-parameter/path-parameters.adoc[] 
+* 요청 변수
+
+include::{snippets}/findByname-method's-parameter/links.adoc[] 
+* 하이퍼링크 설명
+
+include::{snippets}/findByname-method's-parameter/response-body.adoc[] 
+* 요청 결과
+
+[[FindWithStreetNameAndYear]]
+=== 도로명+년도 로  유동인구 검색하기
+도로명과 원하는 년도로 정보를 검색합니다 
+
+NOTE: wwww.whereareyougoing/district/"원하는도로명"/"원하시는년도" 를 인터넷 주소창에 입력하시면 됩니다 
+
+CAUTION: 2014년 부터 정보가 제공되기 때문에 2014년 이전의 값을 입력하시면 안됩니다
+include::{snippets}/findStreetNameWithYear-method's-parameter/path-parameters.adoc[] 
+* 요청 변수
+
+include::{snippets}/findStreetNameWithYear-method's-parameter/links.adoc[] 
+* 하이퍼링크 설명
+
+include::{snippets}/findStreetNameWithYear-method's-parameter/response-body.adoc[] 
+* 요청 결과
+
+
+[[FindWithStreetNameAndYearAndQuarter]]
+=== 도로명+년도+분기 로 유동인구 검색하기
+도로명과 원하는 년도로 정보를 검색합니다 
+
+NOTE: wwww.whereareyougoing/district/"원하는도로명"/"원하시는년도"/"원하시는분기" 를 인터넷 주소창에 입력하시면 됩니다 
+include::{snippets}/data-info/path-parameters.adoc[] 
+* 요청 변수
+
+include::{snippets}/data-info/links.adoc[] 
+* 하이퍼링크 설명
+
+include::{snippets}/data-info/response-body.adoc[] 
+* 요청 결과
